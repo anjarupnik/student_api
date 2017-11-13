@@ -13,13 +13,4 @@ const studentSchema = new Schema({
   evaluations: [evaluationSchema],
 });
 
-const classSchema = new Schema({
-  batchNumber: { type: Number, required: true},
-  startDate: { type: Date },
-  endDate: { type: Date },
-  students: [studentSchema],
-  questions: [String],
-  questionsDate: { type: Date, default: Date.now},
-});
-
-module.exports = mongoose.model('classes', classSchema)
+module.exports = mongoose.model('students', studentSchema)
