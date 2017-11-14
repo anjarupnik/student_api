@@ -15,7 +15,7 @@ router.get('/batches/:id/students', (req, res, next) => {
       .catch((error) => next(error))
   })
 
-  .post('/batches/:id/students', authenticate, (req, res, next) => {
+  .put('/batches/:id/students', authenticate, (req, res, next) => {
     const id = req.params.id
     let newStudent = req.body
 
