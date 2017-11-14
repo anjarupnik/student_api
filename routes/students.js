@@ -25,9 +25,7 @@ router.get('/batches/:id/students', (req, res, next) => {
        var batchNew= batch
        batchNew.students.push(newStudent)
 
-        const updatedBatch = batchNew
-
-        Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
+        Batch.findByIdAndUpdate(id, { $set: batchNew }, { new: true })
           .then((batch) => res.json(batch))
           .catch((error) => next(error))
          })
