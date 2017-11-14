@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 mongoose.Promise = global.Promise
 
-const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost/recipes'
+const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost/batches'
 mongoose.set('debug', true)
 mongoose.connect(MONGODB_URL, { useMongoClient: true })
 
