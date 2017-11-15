@@ -11,6 +11,7 @@ const studentSchema = new Schema({
   name: { type: String, required: true },
   photo: { type: String },
   evaluations: [evaluationSchema],
+  batchId: { type: Schema.Types.ObjectId, ref: 'batches' }
 });
 
 module.exports = mongoose.model('students', studentSchema)
