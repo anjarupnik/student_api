@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const passport = require('../config/auth')
-const { Batch } = require('../models')
+const { Batch, Student } = require('../models')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
@@ -14,12 +14,17 @@ router.get('/batches', (req, res, next) => {
   .get('/batches/:id', (req, res, next) => {
     const id = req.params.id
 
+   Student.find({ batchId: id})
+      .then((student) => {
     Batch.findById(id)
       .then((batch) => {
         if (!batch) { return next() }
+        batch.students = student
+        batch.save()
         res.json(batch)
       })
       .catch((error) => next(error))
+  })
   })
   .post('/batches', authenticate, (req, res, next) => {
     let newBatch = req.body

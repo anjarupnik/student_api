@@ -15,26 +15,15 @@ router.get('/batches/:id/students', (req, res, next) => {
       .catch((error) => next(error))
   })
 
-  .put('/batches/:id/students', authenticate, (req, res, next) => {
+  .post('/batches/:id/students', authenticate, (req, res, next) => {
     const id = req.params.id
     let newStudent = req.body
 
-    Batch.findById(id)
-      .then((batch) => {
-       if (!batch) { return next() }
-       var batchNew= batch
-       batchNew.students.push(newStudent)
-
-        Batch.findByIdAndUpdate(id, { $set: batchNew }, { new: true })
-          .then((batch) => res.json(batch))
-          .catch((error) => next(error))
-         })
-
-
-
-
-
+    Student.create(newStudent)
+     .then((student) => res.json(student))
+     .catch((error) => next(error))
 })
+
 
 
 
