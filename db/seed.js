@@ -6,7 +6,7 @@ const createUrl = (path) => {
   return `${process.env.HOST || `http://localhost:${process.env.PORT || 3030}`}${path}`
 }
 
-const createClasses = (token) => {
+const createBatches = (token) => {
   return batches.map((batch) => {
     return request
       .post(createUrl('/batches'))
@@ -16,17 +16,19 @@ const createClasses = (token) => {
         console.log('Batch seeded...', res.body.title)
       })
       .catch((err) => {
-        console.error('Error seeding recipe!', err)
+        console.error('Error seeding rbatch!', err)
       })
   })
 }
+
+
 const authenticate = (email, password) => {
   request
     .post(createUrl('/sessions'))
     .send({ email, password })
     .then((res) => {
       console.log('Authenticated!')
-      return createClasses(res.body.token)
+      return createBatches(res.body.token)
     })
     .catch((err) => {
       console.error('Failed to authenticate!', err.message)

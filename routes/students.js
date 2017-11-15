@@ -4,19 +4,7 @@ const { Batch, Student } = require('../models')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
-router.get('/batches/:id/students', (req, res, next) => {
-    const id = req.params.id
-
-    Batch.findById(id)
-      .then((batch) => {
-        if (!batch) { return next() }
-        res.json(batch)
-      })
-      .catch((error) => next(error))
-  })
-
-  .post('/batches/:id/students', authenticate, (req, res, next) => {
-    const id = req.params.id
+router.post('/students', authenticate, (req, res, next) => {
     let newStudent = req.body
 
     Student.create(newStudent)
