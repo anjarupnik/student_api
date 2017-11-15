@@ -24,6 +24,15 @@ router.get('/students/:id', authenticate, (req, res, next) => {
        .catch((error) => next(error))
   })
 
+  .put('/students/:id', authenticate, (req, res, next) => {
+    const id = req.params.id
+    const updatedStudent = req.body
+
+     Student.findByIdAndUpdate(id, { $set: updatedStudent }, { new: true })
+       .then((student) => res.json(student))
+       .catch((error) => next(error))
+  })
+
   .patch('/students/:id', authenticate, (req, res, next) => {
     const id = req.params.id
     const studentRate = req.body
