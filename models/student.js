@@ -3,13 +3,13 @@ const { Schema } = mongoose
 
 const evaluationSchema = new Schema({
   color: { type: String, default: "green" },
-  date: { type: Date, default: Date.now },
+  date: { type: String, default: Date.now },
   remark: { type: String },
 });
 
 const studentSchema = new Schema({
   name: { type: String, required: true },
-  photo: { type: String },
+  photo: { type: String, required: true },
   evaluations: [evaluationSchema],
   batchId: { type: Schema.Types.ObjectId, ref: 'batches' }
 });
