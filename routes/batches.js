@@ -65,7 +65,7 @@ router.get('/batches', (req, res, next) => {
 
       ask()
       updatedBatch.questions=questions
-debugger
+      
      Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
        .then((batch) => res.json(student))
        .catch((error) => next(error))

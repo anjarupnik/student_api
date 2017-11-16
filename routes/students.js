@@ -28,10 +28,13 @@ router.get('/students/:id', authenticate, (req, res, next) => {
     const id = req.params.id
     const updatedStudent = req.body
 
+    if (updatedStudent.evaluations[updatedStudent.evaluations.length-1].date === updatedStudent.evaluations[updatedStudent.evaluations.length-2].date )
+       {updatedStudent.evaluations.splice((updatedStudent.evaluations.length-2), 1)}
+
      Student.findByIdAndUpdate(id, { $set: updatedStudent }, { new: true })
        .then((student) => res.json(student))
        .catch((error) => next(error))
-  })
+    })
 
   .patch('/students/:id', authenticate, (req, res, next) => {
     const id = req.params.id
@@ -40,7 +43,8 @@ router.get('/students/:id', authenticate, (req, res, next) => {
     Student.findById(id)
      .then((student) => {
        if (!student) { return next() }
-
+       if (student.evaluations[student.evaluations.length-1].date ===  studentRate.date)
+          {student.evaluations.splice((student.evaluations.length-1), 1)}
       student.evaluations.push(studentRate)
 
        Student.findByIdAndUpdate(id, { $set: student }, { new: true })
