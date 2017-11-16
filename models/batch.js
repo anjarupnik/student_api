@@ -8,7 +8,6 @@ const batchSchema = new Schema({
   endDate: { type: String, required: true },
   students: [students],
   questions: [String],
-  questionsDate: { type: Date, default: Date.now},
 });
 
 module.exports = mongoose.model('batches', batchSchema)
